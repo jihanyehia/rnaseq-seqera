@@ -1,0 +1,256 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com//master/nextflow_schema.json",
+    "title": " pipeline parameters",
+    "description": "",
+    "type": "object",
+    "$defs": {
+        "input_output_options": {
+            "title": "Input/output options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Define where the pipeline should find input data and save output data.",
+            "properties": {
+                "SEreads": {
+                    "type": "string",
+                    "fa_icon": "far fa-file",
+                    "format": "file-path",
+                    "mimetype": "text/plain"
+                },
+                "PEreads": {
+                    "type": "string",
+                    "fa_icon": "far fa-copy",
+                    "format": "file-path",
+                    "mimetype": "text/plain"
+                },
+                "metadata": {
+                    "type": "string",
+                    "description": "Full path to metadata file",
+                    "help_text": "It should be a text file (.txt) with samples in rows and conditions in columns. Last row \"Reference\" should contain the reference levels of each condition (e.g. Control, WT)",
+                    "fa_icon": "fas fa-file-alt",
+                    "format": "file-path",
+                    "mimetype": "text/plain"
+                },
+                "outdir": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "fa_icon": "fas fa-folder-open",
+                    "description": "Parent directory to place intermediate and final output files"
+                }
+            },
+            "required": [
+                "metadata",
+                "outdir"
+            ]
+        },
+        "reference_genome": {
+            "title": "Reference genome",
+            "type": "object",
+            "description": "Reference genome related files required to run the pipeline",
+            "default": "",
+            "properties": {
+                "genome": {
+                    "type": "string",
+                    "description": "Path to FASTA genome file (.fa)",
+                    "help_text": "Full path required",
+                    "fa_icon": "far fa-file-code",
+                    "format": "file-path"
+                },
+                "annotation": {
+                    "type": "string",
+                    "description": "Path to GTF annotation file (.gtf)",
+                    "help_text": "Full path required",
+                    "fa_icon": "far fa-file-code",
+                    "format": "file-path"
+                },
+                "refFlat": {
+                    "type": "string",
+                    "fa_icon": "far fa-file-code",
+                    "description": "Gene annotations in refFlat form (.txt.gz)",
+                    "help_text": "This gene annotation file form is used by Picard's CollectMultipleMetrics before and after removing duplicates. (Full path required) ",
+                    "format": "file-path"
+                }
+            },
+            "required": [
+                "genome",
+                "annotation",
+                "refFlat"
+            ]
+        },
+        "filtering_options": {
+            "title": "Filtering options",
+            "type": "object",
+            "description": "Minimum lengths and quality scores for filtering reads",
+            "default": "",
+            "properties": {
+                "short_minQ": {
+                    "type": "integer",
+                    "default": 20,
+                    "fa_icon": "fas fa-filter",
+                    "description": "Minimum quality score for filtering short reads"
+                },
+                "short_minLen": {
+                    "type": "integer",
+                    "default": 20,
+                    "fa_icon": "fas fa-filter",
+                    "description": "Minimum read length for filtering short reads"
+                },
+                "long_minQ": {
+                    "type": "integer",
+                    "default": 7,
+                    "fa_icon": "fas fa-filter",
+                    "description": "Minimum quality score for filtering long reads"
+                },
+                "long_minLen": {
+                    "type": "integer",
+                    "default": 100,
+                    "fa_icon": "fas fa-filter",
+                    "description": "Minimum read length for filtering long reads"
+                }
+            }
+        },
+        "alignment_and_counting_options": {
+            "title": "Alignment and Counting options",
+            "type": "object",
+            "description": "Parameters for STAR and FeatureCounts",
+            "default": "",
+            "properties": {
+                "overhang": {
+                    "type": "integer",
+                    "default": 149,
+                    "fa_icon": "fas fa-tools",
+                    "description": "STAR's sjdboverhang (read length-1)",
+                    "help_text": "should be = max(read length) - 1"
+                },
+                "strandedness": {
+                    "type": "integer",
+                    "default": 0,
+                    "fa_icon": "fas fa-tools",
+                    "description": "FeatureCounts check for performing strand-specific read counts",
+                    "help_text": "unstranded = 0 (default)\nstranded = 1\nreversely stranded = 2",
+                    "enum": [
+                        0,
+                        1,
+                        2
+                    ]
+                }
+            }
+        },
+        "deseq2_options": {
+            "title": "DESeq2 options",
+            "type": "object",
+            "description": "Cut-off values for determining differentially expressed genes",
+            "default": "",
+            "properties": {
+                "pvalue": {
+                    "type": "number",
+                    "default": 0.05,
+                    "fa_icon": "fas fa-calculator",
+                    "description": "Significance threshold for adjusted p-values to identify differentially expressed genes",
+                    "help_text": "Default = 0.05"
+                },
+                "lfcThreshold": {
+                    "type": "number",
+                    "default": 0,
+                    "fa_icon": "fas fa-calculator",
+                    "help_text": "Default = 0",
+                    "description": "Log2 fold change threshold to filter genes based on expression changes"
+                }
+            }
+        },
+        "fgsea_related_options": {
+            "title": "FGSEA related options",
+            "type": "object",
+            "description": "Parameters for Pathway Enrichment Analysis",
+            "default": "",
+            "properties": {
+                "species": {
+                    "type": "string",
+                    "fa_icon": "fas fa-dna",
+                    "description": "Speices under study for MSigDB",
+                    "help_text": "Choose from the following supported species: \nHomo sapiens, Drosophila melanogaster, Mus musculus",
+                    "enum": [
+                        "Homo sapiens",
+                        "Drosophila melanogaster",
+                        "Mus musculus"
+                    ]
+                },
+                "collections": {
+                    "type": "string",
+                    "fa_icon": "fas fa-dna",
+                    "help_text": "List of collections: H, C1, C2, C3, C4, C5, C6, C7, C8\nDefault: H",
+                    "description": "MSigDB collections for pathway enrichment analysis",
+                    "default": "H"
+                },
+                "subcategories": {
+                    "type": "string",
+                    "fa_icon": "fas fa-dna",
+                    "description": "MSigDB subcategories of collections",
+                    "help_text": "Used if interested in certain subcategories not all\nYou can explore subcategories with the command msigdbr_collections() from the msigdbr package in R"
+                },
+                "nperm": {
+                    "type": "integer",
+                    "default": 1000,
+                    "fa_icon": "fas fa-tools",
+                    "description": "FGSEA's number of permutations",
+                    "help_text": "Default = 1000"
+                }
+            },
+            "required": [
+                "species"
+            ]
+        },
+        "other_options": {
+            "title": "Other options",
+            "type": "object",
+            "description": "General options for running the pipeline",
+            "default": "",
+            "properties": {
+                "project": {
+                    "type": "string",
+                    "description": "Project name to be used as the name of the directory",
+                    "fa_icon": "fas fa-signature"
+                },
+                "isSingle": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-toggle-off",
+                    "description": "Run pipeline in single-end read mode",
+                    "help_text": "Default: paired-end read mode (false)"
+                },
+                "isLong": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-toggle-off",
+                    "description": "Run pipeline in long read mode",
+                    "help_text": "Default: short read mode (false)"
+                }
+            },
+            "required": [
+                "project",
+                "samples"
+            ]
+        }
+    },
+    "allOf": [
+        {
+            "$ref": "#/$defs/input_output_options"
+        },
+        {
+            "$ref": "#/$defs/reference_genome"
+        },
+        {
+            "$ref": "#/$defs/filtering_options"
+        },
+        {
+            "$ref": "#/$defs/alignment_and_counting_options"
+        },
+        {
+            "$ref": "#/$defs/deseq2_options"
+        },
+        {
+            "$ref": "#/$defs/fgsea_related_options"
+        },
+        {
+            "$ref": "#/$defs/other_options"
+        }
+    ]
+}

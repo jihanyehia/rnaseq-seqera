@@ -1,0 +1,10 @@
+name: trim
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+  - conda-forge/label/broken
+dependencies:
+  - fastp=0.22.0
+  - porechop=0.2.4
+  - chopper=0.6.0

@@ -1,0 +1,21 @@
+reports:
+  "**/MultiQC_*.html":
+    display: "MultiQC Reports"
+
+  "**/Rplots.pdf":
+    display: "DESeq2 Plots"
+
+  "**/Rplots_*.pdf":
+    display: "FGSEA Enrichment Tables"
+
+  "report_*.html":
+    display: "Execution Report"
+
+  "timeline_*.html":
+    display: "Execution Timeline"
+
+  "trace_*.txt":
+    display: "Trace File"
+
+  "dag_*.html":
+    display: "Workflow Diagram"

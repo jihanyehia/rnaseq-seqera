@@ -1,0 +1,9 @@
+name: counts
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+  - conda-forge/label/broken
+dependencies:
+  - picard=3.3.0
+  - subread=2.0.1

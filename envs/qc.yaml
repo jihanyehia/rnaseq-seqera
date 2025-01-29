@@ -1,0 +1,10 @@
+name: qc
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+  - conda-forge/label/broken
+dependencies:
+  - nanoplot=1.42.0
+  - fastqc=0.11.9
+  - multiqc=1.17
