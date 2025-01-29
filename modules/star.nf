@@ -2,7 +2,6 @@
 process STAR_INDEX {
     conda "envs/map.yaml"
     label 'high'
-    clusterOptions "--nodes=1"
     publishDir "$params.outdir/STAR/", mode:'copy'
     
     output:
