@@ -2,7 +2,6 @@
 process FASTP_SINGLE {
     conda "envs/trim.yaml"
     label 'multi_short'
-    clusterOptions "--nodes=1"
     tag "on $read_id"
     publishDir "$params.outdir/Fastp/", mode:'copy', pattern: '*trimmed.fq.gz'
     
@@ -27,7 +26,6 @@ process FASTP_SINGLE {
 process FASTP_PAIRED {
     conda "envs/trim.yaml"
     label 'multi_short'
-    clusterOptions "--nodes=1"
     tag "on $read_id"
     publishDir "$params.outdir/Fastp/", mode:'copy', pattern: '*trimmed.fq.gz'
     
