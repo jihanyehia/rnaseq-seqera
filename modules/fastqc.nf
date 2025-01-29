@@ -1,6 +1,6 @@
 //Quality control (stage = raw | filtered)
 process FASTQC {
-    conda "envs/qc.yaml"
+    conda "${projectDir}/envs/qc.yaml"
     tag "on $read_id"
     label params.isLong ? 'multi_long' : 'multi_short'
     publishDir "$params.outdir/FastQC/", mode:'copy'
