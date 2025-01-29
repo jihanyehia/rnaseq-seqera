@@ -35,7 +35,7 @@
                     "type": "string",
                     "format": "directory-path",
                     "fa_icon": "fas fa-folder-open",
-                    "description": "Parent directory to place intermediate and final output files"
+                    "description": "Parent directory to place intermediate and final output files",
                     "default": "gs://leelab-rnaseq-pipeline/RNASeq_results/$params.project"
                 }
             },
