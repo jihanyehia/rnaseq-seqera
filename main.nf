@@ -12,7 +12,6 @@ def helpMessage() {
    Optional arguments:
          --project                Project name to be used as the name of the directory holding the output files
          --metadata               Full path to metadata file with samples in rows and conditions in columns. Last row (Reference) should contain the reference levels of each condition (e.g. Control, WT)
-         --samples                Number of samples in the study
          --isLong                 Boolean to run pipeline in long read mode. Default is short read mode [false]
          --isSingle               Boolean to run pipeline in single-end read mode. Default is paired-end read mode [false]
          --PEreads                Full path to paired-end read files with Rex (example:*_{1,2}.fq.gz)
