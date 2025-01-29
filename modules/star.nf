@@ -1,6 +1,6 @@
 //Indexing the genome with STAR
 process STAR_INDEX {
-    conda "envs/map.yaml"
+    conda "${projectDir}/envs/map.yaml"
     label 'high'
     publishDir "$params.outdir/STAR/", mode:'copy'
     
@@ -19,7 +19,7 @@ process STAR_INDEX {
 
 //Mapping filtered short single/paired-end reads to genome generating a coordinate-sorted bam file
 process STAR_MAP {
-    conda "envs/map.yaml"
+    conda "${projectDir}/envs/map.yaml"
     label 'high'
     tag "on $read_id"
     publishDir "$params.outdir/STAR/", mode:'copy'
