@@ -226,8 +226,7 @@
                 }
             },
             "required": [
-                "project",
-                "samples"
+                "project"
             ]
         }
     },
