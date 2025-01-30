@@ -7,7 +7,7 @@ def helpMessage() {
   log.info """
    Usage:
     The typical command for running the pipeline is as follows:
-        nextflow run rnaseq.nf
+        nextflow run main.nf
 
    Optional arguments:
          --project                Project name to be used as the name of the directory holding the output files
