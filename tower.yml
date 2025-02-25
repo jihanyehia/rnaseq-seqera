@@ -2,6 +2,18 @@ reports:
   "**/MultiQC_*.html":
     display: "MultiQC Reports"
 
+  "**/DESeq2/updated_counts.txt":
+    display: "Counts File"
+
+  "**/DESeq2/DESeq_summary.txt":
+    display: "DESeq2 Summary"
+
+  "**/DESeq2/Upregulated_*.csv":
+    display: "Upregulated Genes"
+
+  "**/DESeq2/Downregulated_*.csv":
+    display: "Downregulated Genes"
+
   "**/Rplots.pdf":
     display: "DESeq2 Plots"
 
