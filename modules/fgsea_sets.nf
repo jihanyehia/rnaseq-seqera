@@ -1,6 +1,6 @@
 //Download fgsea gene sets of interest (species, collections, subcategories) 
 process FGSEA_SETS {
-    conda "envs/r.yaml"
+    container 'community.wave.seqera.io/library/bioconductor-biomart_bioconductor-deseq2_bioconductor-fgsea_r-ashr_pruned:b4d326d8b7640229'
     publishDir "$params.outdir/FGSEA/", mode:'copy'
     
     output:
