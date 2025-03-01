@@ -1,6 +1,6 @@
 //Adapter trimming for Nanopore
 process PORECHOP {
-    conda "envs/trim.yaml"
+    container 'community.wave.seqera.io/library/chopper_fastp_porechop:f016a52013ff88e7'
     label 'multi_long'
     tag "on $read_id"
     publishDir "$params.outdir/Porechop/", mode:'copy'
@@ -22,7 +22,7 @@ process PORECHOP {
 
 //Adapter filtering for Nanopore
 process CHOPPER {
-    conda "envs/trim.yaml"
+    container 'community.wave.seqera.io/library/chopper_fastp_porechop:f016a52013ff88e7'
     label 'multi_long'
     tag "on $read_id"
     publishDir "$params.outdir/CHOPPER/", mode:'copy'
