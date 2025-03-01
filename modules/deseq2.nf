@@ -1,5 +1,5 @@
 process DESEQ2 {
-    conda "envs/r.yaml"
+    container 'community.wave.seqera.io/library/bioconductor-biomart_bioconductor-deseq2_bioconductor-fgsea_r-ashr_pruned:b4d326d8b7640229'
     publishDir "$params.outdir/DESeq2/", mode:'copy'
     
     input:
