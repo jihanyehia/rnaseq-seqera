@@ -1,6 +1,6 @@
 //Indexing the genome with STAR
 process STAR_INDEX {
-    conda "${projectDir}/envs/map.yaml"
+    container 'community.wave.seqera.io/library/minimap2_picard_samtools_star_subread:a1a7ac39cfcdefee'
     label 'high'
     publishDir "$params.outdir/STAR/", mode:'copy'
     
