@@ -1,7 +1,7 @@
 //Create heatmaps of genes that were found to be differentially expressed in pathways that are among the top enriched
 process HEATMAPS {
     debug true //to show echo in terminal
-    conda "envs/py.yaml"
+    container 'community.wave.seqera.io/library/matplotlib_pandas_python_scipy_seaborn:7eec49afa392f90e'
     label 'high'
     cpus '4'
     publishDir "$params.outdir/FGSEA/Heatmaps/", mode:'copy'
