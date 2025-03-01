@@ -1,6 +1,6 @@
 //Building index for Minimap2
 process MINIMAP2_INDEX {
-    conda "envs/map.yaml"
+    container 'community.wave.seqera.io/library/minimap2_picard_samtools_star_subread:a1a7ac39cfcdefee'
     memory '20 GB'
     publishDir "$params.outdir/Minimap2/Index", mode:'copy'
     
