@@ -1,6 +1,6 @@
 //Quality control (stage = raw | filtered)
 process FASTQC {
-    conda "${projectDir}/envs/qc.yaml"
+    container 'community.wave.seqera.io/library/fastqc_multiqc_nanoplot:60ad77caa9e5f469'
     tag "on $read_id"
     label params.isLong ? 'multi_long' : 'multi_short'
     publishDir "$params.outdir/FastQC/", mode:'copy'
