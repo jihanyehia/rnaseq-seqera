@@ -1,6 +1,6 @@
 //Dealing with duplicates: AlignmentSummaryMetrics, MarkDuplicates, AlignmentSummaryMetrics
 process DUPLICATES {
-    conda "envs/counts.yaml"
+    container 'community.wave.seqera.io/library/minimap2_picard_samtools_star_subread:a1a7ac39cfcdefee'
     tag "on $read_id"
     label params.isLong ? 'multi_long' : 'high'  
     publishDir "$params.outdir/Duplicates/", mode:'copy'
