@@ -36,7 +36,7 @@
                     "format": "directory-path",
                     "fa_icon": "fas fa-folder-open",
                     "description": "Parent directory to place intermediate and final output files",
-                    "default": "gs://leelab-rnaseq-pipeline/RNASeq_results/$params.project"
+                    "default": "gs://leelab-rnaseq-pipeline/RNASeq_results/"
                 }
             },
             "required": [
@@ -207,11 +207,6 @@
             "description": "General options for running the pipeline",
             "default": "",
             "properties": {
-                "project": {
-                    "type": "string",
-                    "description": "Project name to be used as the name of the directory",
-                    "fa_icon": "fas fa-signature"
-                },
                 "isSingle": {
                     "type": "boolean",
                     "fa_icon": "fas fa-toggle-off",
@@ -224,10 +219,7 @@
                     "description": "Run pipeline in long read mode",
                     "help_text": "Default: short read mode (false)"
                 }
-            },
-            "required": [
-                "project"
-            ]
+            }
         }
     },
     "allOf": [
