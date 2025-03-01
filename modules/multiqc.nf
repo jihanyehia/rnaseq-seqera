@@ -1,6 +1,6 @@
 //Generating MultiQC report
 process MULTIQC {
-    conda "envs/qc.yaml"
+    container 'community.wave.seqera.io/library/fastqc_multiqc_nanoplot:60ad77caa9e5f469'
     publishDir "$params.outdir/MultiQC/", mode:'copy'
     
     input:
