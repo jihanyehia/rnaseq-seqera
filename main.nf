@@ -7,29 +7,28 @@ def helpMessage() {
   log.info """
    Usage:
     The typical command for running the pipeline is as follows:
-        nextflow run main.nf
+        nextflow run rnaseq.nf
 
    Optional arguments:
-         --project                Project name to be used as the name of the directory holding the output files
-         --metadata               Full path to metadata file with samples in rows and conditions in columns. Last row (Reference) should contain the reference levels of each condition (e.g. Control, WT)
-         --isLong                 Boolean to run pipeline in long read mode. Default is short read mode [false]
-         --isSingle               Boolean to run pipeline in single-end read mode. Default is paired-end read mode [false]
-         --PEreads                Full path to paired-end read files with Rex (example:*_{1,2}.fq.gz)
          --SEreads                Full path to single-end read files with Rex (example:*.fastq)
+         --PEreads                Full path to paired-end read files with Rex (example:*_{1,2}.fq.gz)
+         --metadata               Full path to metadata file with samples in rows and conditions in columns. Last row (Reference) should contain the reference levels of each condition (e.g. Control, WT)   
+         --outdir                 Parent directory to place intermediate and final output files
          --genome                 Reference genome (full path required)
          --annotation             Gene annotation file (full path required)
          --refFlat                Gene annotations in refFlat form (full path required)
-         --outdir                 Parent directory to place intermediate and final output files
          --[short/long]_minQ      Minimum quality score for filtering short/long reads
          --[short/long]_minLen    Minimum read length for short/long filtering
          --overhang               STAR's sjdboverhang (should be max(read length) - 1)
-         --strandedness           FeatureCounts check for performing strand-specific read counts (unstranded = 0, stranded = 1, reversely stranded = 2). Default = 0. 
+         --strandedness           FeatureCounts strand-specific read counts: unstranded = 0, stranded = 1, reversely stranded = 2. Automatic strandedness detection if kept empty (default).
+         --pvalue                 Significance threshold for adjusted p-values to identify differentially expressed genes. Default = 0.05
+         --lfcThreshold           Log2 fold change threshold to filter genes based on expression changes. Default = 0
          --species                Speices under study for MSigDB (Homo sapiens, Drosophila melanogaster, Mus musculus)
          --collections            MSigDB collections for pathway enrichment analysis (C1,C2,C3,C4,C5,C6,C7,C8,H)
          --subcategories          MSigDB subcategories of collections (used if interested in certain subcategories not all)
-         --pvalue                 Significance threshold for adjusted p-values to identify differentially expressed genes. Default = 0.05
-         --lfcThreshold           Log2 fold change threshold to filter genes based on expression changes. Default = 0
          --nperm                  FGSEA's number of permutations. Default = 1000
+         --isLong                 Boolean to run pipeline in long read mode. Default is short read mode [false]
+         --isSingle               Boolean to run pipeline in single-end read mode. Default is paired-end read mode [false]
          --help                   This usage statement
         """
 }
@@ -66,7 +65,6 @@ include { GENE_NAMES } from './modules/get_gene_names.nf'
 include { DESEQ2 } from './modules/deseq2.nf'
 include { FGSEA_SETS } from './modules/fgsea_sets.nf'
 include { FGSEA } from './modules/fgsea.nf'
-include { HEATMAPS } from './modules/heatmaps.nf'
 
 
 //Main workflow
@@ -104,7 +102,6 @@ workflow {
     FGSEA_SETS()
     combined_ranks = DESEQ2.out.ranked.mix(DESEQ2.out.ranked_shrunk).mix(DESEQ2.out.ranked_DE)
     FGSEA(combined_ranks.flatten(), FGSEA_SETS.out.r_object)
-    //HEATMAPS(DESEQ2.out.norm_counts, DESEQ2.out.DE_genes.flatten(), FGSEA_SETS.out.gene_sets, FGSEA.out.top_pathways.collect())
 }
 
 

@@ -1,8 +1,7 @@
 #!/usr/bin/env Rscript
 
-suppressPackageStartupMessages(library(msigdbr))
-suppressPackageStartupMessages(library(dplyr))
-suppressPackageStartupMessages(library(tidyr))
+suppressPackageStartupMessages(library(msigdbr)) #retrieve gene sets from MSigDB database
+suppressPackageStartupMessages(library(dplyr)) #manipulate data(grouping and summarizing gene set data)
 
 # Function to find the category for a given subcategory code
 find_category <- function(subcat, subcategory_dict) {

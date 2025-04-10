@@ -1,6 +1,6 @@
 //Building index for Minimap2
 process MINIMAP2_INDEX {
-    container 'community.wave.seqera.io/library/minimap2_picard_samtools_star_subread:a1a7ac39cfcdefee'
+    conda "envs/map.yaml"
     memory '20 GB'
     publishDir "$params.outdir/Minimap2/Index", mode:'copy'
     
@@ -21,7 +21,7 @@ process MINIMAP2_INDEX {
 
 //Mapping Nanopore reads to the genome and converting SAM file to coordinate-sorted BAM file
 process MINIMAP2_MAP {
-    container 'community.wave.seqera.io/library/minimap2_picard_samtools_star_subread:a1a7ac39cfcdefee'
+    conda "envs/map.yaml"
     label 'multi_long'
     tag "on $read_id"
     publishDir "$params.outdir/Minimap2/", mode:'copy'

@@ -1,7 +1,8 @@
 //Indexing the genome with STAR
 process STAR_INDEX {
-    container 'community.wave.seqera.io/library/minimap2_picard_samtools_star_subread:a1a7ac39cfcdefee'
+    conda "envs/map.yaml"
     label 'high'
+    clusterOptions "--nodes=1"
     publishDir "$params.outdir/STAR/", mode:'copy'
     
     output:
@@ -19,7 +20,7 @@ process STAR_INDEX {
 
 //Mapping filtered short single/paired-end reads to genome generating a coordinate-sorted bam file
 process STAR_MAP {
-    container 'community.wave.seqera.io/library/minimap2_picard_samtools_star_subread:a1a7ac39cfcdefee'
+    conda "envs/map.yaml"
     label 'high'
     tag "on $read_id"
     publishDir "$params.outdir/STAR/", mode:'copy'

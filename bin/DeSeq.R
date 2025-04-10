@@ -1,12 +1,12 @@
 #!/usr/bin/env Rscript
 
-suppressPackageStartupMessages(library(DESeq2))
-suppressPackageStartupMessages(library(dplyr))
-suppressPackageStartupMessages(library(ashr))
-suppressPackageStartupMessages(library(ggplot2))
-suppressPackageStartupMessages(library(ggrepel))
-suppressPackageStartupMessages(library(pheatmap))
-suppressPackageStartupMessages(library(RColorBrewer))
+suppressPackageStartupMessages(library(DESeq2)) #DGE analysis
+suppressPackageStartupMessages(library(dplyr)) #filter, arrange, manipulate results 
+suppressPackageStartupMessages(library(ashr)) #shrink logFold Changes
+suppressPackageStartupMessages(library(ggplot2)) #required for labeling points in PCA plot
+suppressPackageStartupMessages(library(ggrepel)) #required for labeling points in PCA plot
+suppressPackageStartupMessages(library(pheatmap)) #generates sample-sample comparison heatmap
+suppressPackageStartupMessages(library(RColorBrewer)) #sets color palettes for heatmap 
 
 option_list = list(optparse::make_option("--counts",
                                         type = 'character',
@@ -32,6 +32,10 @@ counts_table <- read.table(opt$counts, header = TRUE, sep = "\t", row.names = 1,
 #Remove first 5 columns (chr,start,end,strand,length) and _dedup.bam from sample names
 counts_table <- counts_table[,-c(1:5)]
 colnames(counts_table) <- sub("_dedup.bam", "", colnames(counts_table))
+# Check if the last column is 'ensembl_ids' (added by getGeneNames.R script) and remove it if so
+if (colnames(counts_table)[ncol(counts_table)] == "ensembl_ids") {
+  counts_table <- counts_table[,-ncol(counts_table)]
+}
 # Handle missing values by replacing NAs with zero
 counts_table[is.na(counts_table)] <- 0
 

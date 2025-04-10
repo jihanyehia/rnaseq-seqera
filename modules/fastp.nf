@@ -1,7 +1,8 @@
 //Adapter trimming and filtering for short single-end reads (default min_quality_score=15; default min_length=15; low complexity filter; threading;json report)
 process FASTP_SINGLE {
-    container 'community.wave.seqera.io/library/chopper_fastp_porechop:f016a52013ff88e7'
+    conda "envs/trim.yaml"
     label 'multi_short'
+    clusterOptions "--nodes=1"
     tag "on $read_id"
     publishDir "$params.outdir/Fastp/", mode:'copy', pattern: '*trimmed.fq.gz'
     
@@ -24,8 +25,9 @@ process FASTP_SINGLE {
 
 //Adapter trimming and filtering for short paired-end reads (default min_quality_score=15; default min_length=15; low complexity filter; threading; automatically detect adapters for paired-end reads; json report)
 process FASTP_PAIRED {
-    container 'community.wave.seqera.io/library/chopper_fastp_porechop:f016a52013ff88e7'
+    conda "envs/trim.yaml"
     label 'multi_short'
+    clusterOptions "--nodes=1"
     tag "on $read_id"
     publishDir "$params.outdir/Fastp/", mode:'copy', pattern: '*trimmed.fq.gz'
     

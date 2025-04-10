@@ -1,9 +1,9 @@
 #!/usr/bin/env Rscript
 
-suppressPackageStartupMessages(library(fgsea))
-suppressPackageStartupMessages(library(msigdbr))
-suppressPackageStartupMessages(library(dplyr))
-suppressPackageStartupMessages(library(gridExtra))
+suppressPackageStartupMessages(library(fgsea)) #runs GSEA and generates plots
+suppressPackageStartupMessages(library(msigdbr)) #works with gene_sets
+suppressPackageStartupMessages(library(dplyr)) #process fgsea results
+suppressPackageStartupMessages(library(gridExtra)) #format enrichment plots
 
 pdf.options(width=18 , height=8)
 

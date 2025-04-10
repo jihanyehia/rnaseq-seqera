@@ -124,11 +124,10 @@
                     "help_text": "should be = max(read length) - 1"
                 },
                 "strandedness": {
-                    "type": "integer",
-                    "default": 0,
+                    "type": "string",
                     "fa_icon": "fas fa-tools",
                     "description": "FeatureCounts check for performing strand-specific read counts",
-                    "help_text": "unstranded = 0 (default)\nstranded = 1\nreversely stranded = 2",
+                    "help_text": "If kept empty (default), pipeline will automatically detect strandedness | unstranded = 0 | stranded = 1 | reversely stranded = 2",
                     "enum": [
                         0,
                         1,

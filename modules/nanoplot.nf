@@ -1,6 +1,6 @@
 //Quality control on Nanopore data (stage = raw | filtered)
 process NANOPLOT {
-    container 'community.wave.seqera.io/library/fastqc_multiqc_nanoplot:60ad77caa9e5f469'
+    conda "envs/qc.yaml"
     tag "on $read_id"
     publishDir "$params.outdir/Nanoplot/", mode:'copy'
     

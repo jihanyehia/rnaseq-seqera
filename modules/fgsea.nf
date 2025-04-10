@@ -1,7 +1,7 @@
 //Run gene set enrichment analysis using fgsea
 process FGSEA {
     debug true //to show echo in terminal
-    container 'community.wave.seqera.io/library/bioconductor-biomart_bioconductor-deseq2_bioconductor-fgsea_r-ashr_pruned:b4d326d8b7640229'
+    conda "envs/r.yaml"
     label 'high'
     cpus '4'
     publishDir "$params.outdir/FGSEA/", mode:'copy'

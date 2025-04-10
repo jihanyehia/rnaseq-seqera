@@ -7,3 +7,5 @@ channels:
 dependencies:
   - picard=3.3.0
   - subread=2.0.1
+  - rseqc
+  - bedops
